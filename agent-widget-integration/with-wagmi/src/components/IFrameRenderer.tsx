@@ -19,6 +19,7 @@ const IframeRenderer: React.FC<IframeRendererProps> = ({
   useEffect(() => {
     // If there is no injected wallet, do nothing
     if (!isInjectedWallet) return;
+    if (!address) return;
 
     // Set a timeout to send a message to the iframe
     const timer = setTimeout(() => {
