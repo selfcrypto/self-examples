@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build output
+/build
+/out
+
+# Next.js
+.next/
+.next.config.js
+
+# Visual Studio Code settings
+.vscode/
+
+# macOS metadata
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
