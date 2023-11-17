@@ -17,12 +17,15 @@ const IframeRenderer: React.FC<IframeRendererProps> = ({
   address,
 }) => {
   useEffect(() => {
+    // If wallet is not connected, don't send the message
     // If there is no injected wallet, do nothing
-    if (!isInjectedWallet) return;
-    if (!address) return;
+    if (!address || !isInjectedWallet) return;
 
-    // Set a timeout to send a message to the iframe
+    // wait 2 seconds for the wallet to be connected and iframe to be ready
+    // send a message to the iframe
     const timer = setTimeout(() => {
+      // message contains address of the currently connected account whenever it changes
+      // This is to sync the account in parent with the account in the widget
       document
         .querySelector("iframe")
         ?.contentWindow?.postMessage(
