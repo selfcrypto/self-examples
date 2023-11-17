@@ -39,8 +39,10 @@ function App() {
   useEffect(() => {
     const { ethereum } = window;
     if (!ethereum) return;
+    // event fired when the currently connected account changes from wallet
     ethereum.on("accountsChanged", () => connectWallet());
 
+    // remove listener when the component is unmounted
     return () => ethereum.off("accountsChanged", () => connectWallet());
   }, []);
 
