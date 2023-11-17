@@ -7,8 +7,8 @@ declare let window: any;
 
 function App() {
   const [address, setAddress] = useState("");
-  const [provider, setProvider] = useState<any>();
-  const [signer, setSigner] = useState<any>();
+  const [provider, setProvider] = useState<ethers.BrowserProvider>();
+  const [signer, setSigner] = useState<ethers.JsonRpcSigner>();
 
   // connect to the wallet
   const connectWallet = async () => {
