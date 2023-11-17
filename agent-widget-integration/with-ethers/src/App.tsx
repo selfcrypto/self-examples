@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import { ethers } from "ethers";
 import IframeRenderer from "./components/IframeRenderer";
@@ -7,11 +7,11 @@ declare let window: any;
 
 function App() {
   const [address, setAddress] = useState("");
-  const [provider, setProvider] = useState<ethers.BrowserProvider>();
-  const [signer, setSigner] = useState<ethers.JsonRpcSigner>();
+  const [, setProvider] = useState<ethers.BrowserProvider>();
+  const [, setSigner] = useState<ethers.JsonRpcSigner>();
 
   // connect to the wallet
-  const connectWallet = async () => {
+  const connectWallet = useCallback(async () => {
     // check if the wallet is already connected
     if (address) return;
 
@@ -33,7 +33,7 @@ function App() {
         console.error(err);
       }
     }
-  };
+  }, [address]);
 
   // listen to account changes
   useEffect(() => {
@@ -44,7 +44,7 @@ function App() {
 
     // remove listener when the component is unmounted
     return () => ethereum.off("accountsChanged", () => connectWallet());
-  }, []);
+  }, [connectWallet]);
 
   const disconnectWallet = () => {
     setAddress("");
@@ -55,7 +55,7 @@ function App() {
   // connect wallet when the app is loaded for the first time
   useEffect(() => {
     connectWallet();
-  }, []);
+  }, [connectWallet]);
 
   return (
     <div>
